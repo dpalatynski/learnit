@@ -59,7 +59,7 @@ class LearnItApp(App):
         self.screen_manager.add_widget(screen)
 
         # ustawienia
-        self.settings = Settings()
+        self.settings = Settings_()
         screen = Screen(name="Settings")
         screen.add_widget(self.settings)
         self.screen_manager.add_widget(screen)
@@ -302,7 +302,7 @@ class CreateNewList(GridLayout):
         learnit.screen_manager.current = "EntryPage"
 
 
-class Settings(GridLayout):
+class Settings_(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
