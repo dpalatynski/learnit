@@ -25,42 +25,38 @@ number = random.randrange(0, len(lines))
 
 
 class LearnItApp(App):
-    def build(self):
+    def __init__(self):
+        super().__init__()
         self.screen_manager = ScreenManager()
-
-        # okienko powitalne
         self.entry_page = EntryPage()
-        screen = Screen(name="EntryPage")
+        self.add_choose_page = AddChoosePage()
+        self.add_word = AddWord()
+        self.create_new_list = CreateNewList()
+        self.word_page = WordPage()
+        self.settings = SettingsPage()
+
+    def build(self):
+        screen = Screen(name="EntryPage")  # Entry Page
         screen.add_widget(self.entry_page)
         self.screen_manager.add_widget(screen)
 
-        # wybranie trybu wpisywania nowych slowek
-        self.add_choose_page = AddChoosePage()
-        screen = Screen(name="AddChoosePage")
+        screen = Screen(name="AddChoosePage")  # Adding words menu (add words or create new lists)
         screen.add_widget(self.add_choose_page)
         self.screen_manager.add_widget(screen)
 
-        # dodaj slowko
-        self.add_word = AddWord()
-        screen = Screen(name="AddWord")
+        screen = Screen(name="AddWord")  # Adding words
         screen.add_widget(self.add_word)
         self.screen_manager.add_widget(screen)
 
-        # dodaj nowa liste
-        self.create_new_list = CreateNewList()
-        screen = Screen(name="CreateNewList")
+        screen = Screen(name="CreateNewList")  # Create new list of words
         screen.add_widget(self.create_new_list)
         self.screen_manager.add_widget(screen)
 
-        # wordpage
-        self.word_page = WordPage()
-        screen = Screen(name="WordPage")
+        screen = Screen(name="WordPage")  # Flashcard
         screen.add_widget(self.word_page)
         self.screen_manager.add_widget(screen)
 
-        # ustawienia
-        self.settings = Settings_()
-        screen = Screen(name="Settings")
+        screen = Screen(name="Settings")  # Settings
         screen.add_widget(self.settings)
         self.screen_manager.add_widget(screen)
 
@@ -302,7 +298,7 @@ class CreateNewList(GridLayout):
         learnit.screen_manager.current = "EntryPage"
 
 
-class Settings_(GridLayout):
+class SettingsPage(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
