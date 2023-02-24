@@ -6,6 +6,7 @@ from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.clock import Clock
 import random
 
 
@@ -108,6 +109,7 @@ class EntryPage(GridLayout):
         learnit.screen_manager.current = "AddWord"
 
     def gotowordpage(self, instance):
+        Clock.schedule_once(learnit.word_page.set_focus, 0.1)
         learnit.screen_manager.current = "WordPage"
 
 
@@ -137,8 +139,7 @@ class WordPage(GridLayout):
 
         # wpisywanie odpowiedzi
         self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.3, size_hint_y=None)
-        self.txt = TextInput(multiline=True, font_size=35, keyboard_mode='managed',  is_focusable=True, focus=True,
-                             unfocus_on_touch=False)
+        self.txt = TextInput(multiline=True, font_size=35)
         self.txt.keyboard_on_key_down = self._on_keyboard_down
         self.mybox.add_widget(self.txt)
         self.add_widget(self.mybox)
@@ -163,31 +164,24 @@ class WordPage(GridLayout):
         self.add_widget(self.mybox)
 
         Window.bind(on_key_down=self._on_keyboard_down)
+        Clock.schedule_once(self.set_focus, 0.1)
 
+    def set_focus(self, dt):
+        self.txt.focus = True
 
     def _on_keyboard_down(self, *args):
         if args[1] == 276:
-            self.txt.cursor = (self.txt.cursor[0]-1, self.txt.cursor[1])
+            self.txt.do_cursor_movement(action='cursor_left')
         elif args[1] == 275:
-            self.txt.cursor = (self.txt.cursor[0]+1, self.txt.cursor[1])
+            self.txt.do_cursor_movement(action='cursor_right')
         elif args[1] == 273:
-            self.txt.cursor = (self.txt.cursor[0], self.txt.cursor[1]-1)
+            self.txt.do_cursor_movement(action='cursor_up')
         elif args[1] == 274:
-            self.txt.cursor = (self.txt.cursor[0], self.txt.cursor[1]+1)
+            self.txt.do_cursor_movement(action='cursor_down')
         elif args[2] == 42:
-            self.txt.text = self.txt.text[:-1]
-        elif args[1] == 303 or args[1] == 304:
-            self.huge = True
-        elif args[1] == 13:
+            self.txt.do_backspace()
+        elif args[1] == 13 and self.txt.focus is True:  # enter
             self.check_answer()
-        elif args[1] == 301:
-            pass
-        elif args[3] is not None:
-            if self.huge is True:
-                self.txt.text += args[3].upper()
-                self.huge = False
-            else:
-                self.txt.text += args[3]
 
     def exitbutton(self, instance):
         App.get_running_app().stop()
@@ -198,6 +192,7 @@ class WordPage(GridLayout):
 
     def check_answer(self, instance=None):
         words_in_input = self.txt.text.lower()
+        Clock.schedule_once(self.set_focus, 0.1)
         global number
         if words_in_english[number].lower() == words_in_input.strip():
             if self.txt.foreground_color == [0, 0, 0, 1]:
@@ -319,4 +314,3 @@ class SettingsPage(GridLayout):
 
 learnit = LearnItApp()
 learnit.run()
-
