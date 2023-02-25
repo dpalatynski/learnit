@@ -33,7 +33,7 @@ class LearnItApp(App):
         self.add_choose_page = AddChoosePage()
         self.add_word = AddWord()
         self.create_new_list = CreateNewList()
-        self.word_page = WordPage()
+        self.word_page = Flashcard()
         self.settings = SettingsPage()
 
     def build(self):
@@ -53,7 +53,7 @@ class LearnItApp(App):
         screen.add_widget(self.create_new_list)
         self.screen_manager.add_widget(screen)
 
-        screen = Screen(name="WordPage")  # Flashcard
+        screen = Screen(name="Flashcard")  # Flashcard
         screen.add_widget(self.word_page)
         self.screen_manager.add_widget(screen)
 
@@ -81,7 +81,7 @@ class EntryPage(GridLayout):
         self.btn = Button(text='Dodaj slowka', font_size=25)
         self.btn.bind(on_press=self.addchoosepage)
         self.btn1 = Button(text='Start', font_size=25)
-        self.btn1.bind(on_press=self.gotowordpage)
+        self.btn1.bind(on_press=self.gotoflashcard)
         self.mybox.add_widget(self.btn)
         self.mybox.add_widget(self.btn1)
         self.add_widget(self.mybox)
@@ -108,59 +108,58 @@ class EntryPage(GridLayout):
     def addword(self, instance):
         learnit.screen_manager.current = "AddWord"
 
-    def gotowordpage(self, instance):
+    def gotoflashcard(self, instance):
         Clock.schedule_once(learnit.word_page.set_focus, 0.1)
-        learnit.screen_manager.current = "WordPage"
+        learnit.screen_manager.current = "Flashcard"
 
 
-class WordPage(GridLayout):
+class Flashcard(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self.rows = 6
         self.padding = 15
         self.spacing = 15
-        self.huge = False   # capital/normal letter in _on_keyboard_down
 
-        # wyswietlanie slowa
-        self.words = BoxLayout(orientation = 'horizontal', height = Window.size[1]*0.2, size_hint_y = None)
-        self.word = Label(text=words_in_polish[number], font_size=40, color=[128,128,128, 1], halign='left',
+        # display a flashcard
+        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.2, size_hint_y=None)
+        self.word = Label(text=words_in_polish[number], font_size=40, color=(128, 128, 128, 1), halign='left',
                           valign='bottom')
         self.word.bind(size=self.word.setter('text_size'))
         self.words.add_widget(self.word)
         self.add_widget(self.words)
 
-        # roboczy label
+        # display results
         self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.05, size_hint_y=None)
-        self.grade = Label(text=' ', font_size=20, color=[0,128,0, 1], halign='right', valign='bottom')
+        self.grade = Label(text='', font_size=20, color=(0, 128, 0, 1), halign='right', valign='bottom')
         self.grade.bind(size=self.grade.setter('text_size'))
         self.mybox.add_widget(self.grade)
         self.add_widget(self.mybox)
 
-        # wpisywanie odpowiedzi
+        # entry txt field to write an answer
         self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.3, size_hint_y=None)
-        self.txt = TextInput(multiline=True, font_size=35)
+        self.txt = TextInput(multiline=True, font_size=35, cursor_color=(0, 0, 0, 1))
         self.txt.keyboard_on_key_down = self._on_keyboard_down
         self.mybox.add_widget(self.txt)
         self.add_widget(self.mybox)
 
-        # przyciski do slowek
+        # 1st row of buttons: hint & check
         self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
-        self.btn = Button(text='Podpowiedz litere', font_size=25)
-        self.btn1 = Button(text='Sprawdz odpowiedz', font_size=25)
-        self.btn1.bind(on_press=self.check_answer)
-        self.mybox.add_widget(self.btn)
+        self.btn1 = Button(text='Hint', font_size=25)
+        self.btn2 = Button(text='Check', font_size=25)
+        self.btn2.bind(on_press=self.check_answer)
         self.mybox.add_widget(self.btn1)
+        self.mybox.add_widget(self.btn2)
         self.add_widget(self.mybox)
 
-        # przyciski funkcyjne
+        # 2nd row of buttons: go to menu & exit
         self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
-        self.btn2 = Button(text='Menu', font_size=25)
-        self.btn2.bind(on_press=self.gotomenu)
-        self.btn3 = Button(text='Wyjscie', font_size=25)
-        self.btn3.bind(on_press=self.exitbutton)
-        self.mybox.add_widget(self.btn2)
+        self.btn3 = Button(text='Menu', font_size=25)
+        self.btn3.bind(on_press=self.gotomenu)
+        self.btn4 = Button(text='Exit', font_size=25)
+        self.btn4.bind(on_press=self.exitbutton)
         self.mybox.add_widget(self.btn3)
+        self.mybox.add_widget(self.btn4)
         self.add_widget(self.mybox)
 
         Window.bind(on_key_down=self._on_keyboard_down)
@@ -178,7 +177,7 @@ class WordPage(GridLayout):
             self.txt.do_cursor_movement(action='cursor_up')
         elif args[1] == 274:
             self.txt.do_cursor_movement(action='cursor_down')
-        elif args[2] == 42:
+        elif args[2] == 42:  # backspace
             self.txt.do_backspace()
         elif args[1] == 13 and self.txt.focus is True:  # enter
             self.check_answer()
@@ -197,22 +196,31 @@ class WordPage(GridLayout):
         if words_in_english[number].lower() == words_in_input.strip():
             if self.txt.foreground_color == [0, 0, 0, 1]:
                 self.txt.foreground_color = [0, 0.8, 0, 1]
+                self.txt.background_color = (128, 128, 128, 1)
+                self.txt.readonly = True
+                self.txt.cursor_color = (1, 1, 1, 1)
                 self.grade.color = [0, 0.8, 0, 1]
                 self.grade.text = 'Excellent!'
-                self.btn1.text = "Dalej"
+                self.btn2.text = "Next"
             elif self.txt.foreground_color == [0, 0.8, 0, 1] or self.txt.foreground_color == [128, 0, 0, 1]:
                 number = random.randrange(0, len(lines))
                 self.word.text = words_in_polish[number]
+                self.txt.readonly = False
+                self.txt.cursor_color = (0, 0, 0, 1)
                 self.txt.text = ''
                 self.grade.text = ' '
                 self.txt.foreground_color = [0, 0, 0, 1]
-                self.btn1.text = "Sprawdź odpowiedź"
+                self.txt.background_color = (0.5, 0.5, 0.5, 1)
+                self.btn2.text = "Check"
         else:
             self.grade.text = 'Wrong!'
             self.grade.color = [128, 0, 0, 1]
             self.txt.text = words_in_english[number].lower()
             self.txt.foreground_color = [128, 0, 0, 1]
-            self.btn1.text = "Dalej"
+            self.txt.background_color = (128, 128, 128, 1)
+            self.txt.readonly = True
+            self.txt.cursor_color = (1, 1, 1, 1)
+            self.btn2.text = "Next"
 
 
 class AddChoosePage(GridLayout):
