@@ -8,21 +8,7 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 import random
-
-
-Window.size = (600, 400)
-f = open("slowka.txt", "r")
-lines = f.readlines()
-words_in_polish = []
-words_in_english = []
-
-for item in lines:
-    a, b = item.split('--')
-    words_in_english.append(a.strip())
-    words_in_polish.append(b[:-1].strip())
-
-global number
-number = random.randrange(0, len(lines))
+from functions import read_json_to_dict
 
 
 class LearnItApp(App):
@@ -120,10 +106,13 @@ class Flashcard(GridLayout):
         self.rows = 6
         self.padding = 15
         self.spacing = 15
+        self.flashcards = read_json_to_dict('flashcards.json')
+        self.target_word = random.choice(list(self.flashcards.keys()))
+        self.native_word = self.flashcards[self.target_word]
 
         # display a flashcard
         self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.2, size_hint_y=None)
-        self.word = Label(text=words_in_polish[number], font_size=40, color=(128, 128, 128, 1), halign='left',
+        self.word = Label(text=self.native_word, font_size=40, color=(128, 128, 128, 1), halign='left',
                           valign='bottom')
         self.word.bind(size=self.word.setter('text_size'))
         self.words.add_widget(self.word)
@@ -192,8 +181,7 @@ class Flashcard(GridLayout):
     def check_answer(self, instance=None):
         words_in_input = self.txt.text.lower()
         Clock.schedule_once(self.set_focus, 0.1)
-        global number
-        if words_in_english[number].lower() == words_in_input.strip():
+        if self.target_word.lower() == words_in_input.strip():
             if self.txt.foreground_color == [0, 0, 0, 1]:
                 self.txt.foreground_color = [0, 0.5, 0, 1]
                 self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
@@ -203,8 +191,8 @@ class Flashcard(GridLayout):
                 self.grade.text = 'Excellent!'
                 self.btn2.text = "Next"
             elif self.txt.foreground_color == [0, 0.5, 0, 1] or self.txt.foreground_color == [128, 0, 0, 1]:
-                number = random.randrange(0, len(lines))
-                self.word.text = words_in_polish[number]
+                self.new_flashcard()
+                self.word.text = self.native_word
                 self.txt.readonly = False
                 self.txt.cursor_color = (0.99, 0.99, 0.99, 1)
                 self.txt.text = ''
@@ -215,12 +203,25 @@ class Flashcard(GridLayout):
         else:
             self.grade.text = 'Wrong!'
             self.grade.color = [128, 0, 0, 1]
-            self.txt.text = words_in_english[number].lower()
+            self.txt.text = self.target_word
             self.txt.foreground_color = [128, 0, 0, 1]
             self.txt.background_color = (0.75, 0.75, 0.75, 1)
             self.txt.readonly = True
             self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
             self.btn2.text = "Next"
+
+    def answer_correct(self):
+        pass
+
+    def answer_wrong(self):
+        pass
+
+    def new_flashcard_page(self):
+        pass
+
+    def new_flashcard(self):
+        self.target_word = random.choice(list(self.flashcards.keys()))
+        self.native_word = self.flashcards[self.target_word]
 
 
 class AddChoosePage(GridLayout):
@@ -320,5 +321,6 @@ class SettingsPage(GridLayout):
         learnit.screen_manager.current = "EntryPage"
 
 
+Window.size = (600, 400)
 learnit = LearnItApp()
 learnit.run()
