@@ -195,31 +195,31 @@ class Flashcard(GridLayout):
         global number
         if words_in_english[number].lower() == words_in_input.strip():
             if self.txt.foreground_color == [0, 0, 0, 1]:
-                self.txt.foreground_color = [0, 0.8, 0, 1]
-                self.txt.background_color = (128, 128, 128, 1)
+                self.txt.foreground_color = [0, 0.5, 0, 1]
+                self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
+                self.txt.background_color = (0.75, 0.75, 0.75, 1)
                 self.txt.readonly = True
-                self.txt.cursor_color = (1, 1, 1, 1)
                 self.grade.color = [0, 0.8, 0, 1]
                 self.grade.text = 'Excellent!'
                 self.btn2.text = "Next"
-            elif self.txt.foreground_color == [0, 0.8, 0, 1] or self.txt.foreground_color == [128, 0, 0, 1]:
+            elif self.txt.foreground_color == [0, 0.5, 0, 1] or self.txt.foreground_color == [128, 0, 0, 1]:
                 number = random.randrange(0, len(lines))
                 self.word.text = words_in_polish[number]
                 self.txt.readonly = False
-                self.txt.cursor_color = (0, 0, 0, 1)
+                self.txt.cursor_color = (0.99, 0.99, 0.99, 1)
                 self.txt.text = ''
                 self.grade.text = ' '
                 self.txt.foreground_color = [0, 0, 0, 1]
-                self.txt.background_color = (0.5, 0.5, 0.5, 1)
+                self.txt.background_color = (0.99, 0.99, 0.99, 1)
                 self.btn2.text = "Check"
         else:
             self.grade.text = 'Wrong!'
             self.grade.color = [128, 0, 0, 1]
             self.txt.text = words_in_english[number].lower()
             self.txt.foreground_color = [128, 0, 0, 1]
-            self.txt.background_color = (128, 128, 128, 1)
+            self.txt.background_color = (0.75, 0.75, 0.75, 1)
             self.txt.readonly = True
-            self.txt.cursor_color = (1, 1, 1, 1)
+            self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
             self.btn2.text = "Next"
 
 
