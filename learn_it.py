@@ -17,7 +17,7 @@ words_in_polish = []
 words_in_english = []
 
 for item in lines:
-    a,b = item.split('-')
+    a, b = item.split('--')
     words_in_english.append(a.strip())
     words_in_polish.append(b[:-1].strip())
 
