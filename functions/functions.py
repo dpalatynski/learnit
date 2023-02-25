@@ -17,7 +17,7 @@ def create_dict_from_txt_file(txt_file: str) -> dict:
     return words_dict
 
 
-def create_json_from_dict(words_dict: str, filename='flashcards.json') -> None:
+def create_json_from_dict(words_dict: dict, filename='flashcards.json') -> None:
     """ Creates json files from dictionary. """
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(words_dict, f, ensure_ascii=False, indent=4)
@@ -28,6 +28,3 @@ def read_json_to_dict(words_json: str) -> dict:
     with open(words_json, 'r', encoding='utf-8') as f:
         words_dict = json.load(f)
     return words_dict
-
-
-create_json_from_dict(create_dict_from_txt_file('slowka.txt'))
