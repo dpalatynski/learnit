@@ -10,6 +10,6 @@ Future updates:
 
 Screenshots:
 
-![alt text](https://github.com/dpalatynski/learnit/blob/main/main_screen.png)
-![alt text](https://github.com/dpalatynski/learnit/blob/main/good_example.png)
-![alt text](https://github.com/dpalatynski/learnit/blob/main/bad_example.png)
+![alt text](https://github.com/dpalatynski/learnit/blob/main/media/main_screen.png)
+![alt text](https://github.com/dpalatynski/learnit/blob/main/media/good_example.png)
+![alt text](https://github.com/dpalatynski/learnit/blob/main/media/bad_example.png)
