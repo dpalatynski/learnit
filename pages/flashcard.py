@@ -119,7 +119,7 @@ class Flashcard(GridLayout):
         self.new_flashcard()
         self.word.text = self.native_word
         self.txt.readonly = False
-        self.txt.cursor_color = (0.99, 0.99, 0.99, 1)
+        self.txt.cursor_color = (0, 0, 0, 1)
         self.txt.text = ''
         self.grade.text = ' '
         self.txt.foreground_color = (0, 0, 0, 1)
