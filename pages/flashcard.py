@@ -21,6 +21,7 @@ class Flashcard(GridLayout):
         self.flashcards = read_json_to_dict('./data/flashcards.json')
         self.target_word = random.choice(list(self.flashcards.keys()))
         self.native_word = self.flashcards[self.target_word]
+        self.displayed_results = False
 
         # display a flashcard
         self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.2, size_hint_y=None)
@@ -84,45 +85,47 @@ class Flashcard(GridLayout):
             self.check_answer()
 
     def check_answer(self, _=None):
-        words_in_input = self.txt.text.lower()
         Clock.schedule_once(self.set_focus, 0.1)
-        if self.target_word.lower() == words_in_input.strip():
-            if self.txt.foreground_color == [0, 0, 0, 1]:
-                self.txt.foreground_color = [0, 0.5, 0, 1]
-                self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
-                self.txt.background_color = (0.75, 0.75, 0.75, 1)
-                self.txt.readonly = True
-                self.grade.color = [0, 0.8, 0, 1]
-                self.grade.text = 'Excellent!'
-                self.btn2.text = "Next"
-            elif self.txt.foreground_color == [0, 0.5, 0, 1] or self.txt.foreground_color == [128, 0, 0, 1]:
-                self.new_flashcard()
-                self.word.text = self.native_word
-                self.txt.readonly = False
-                self.txt.cursor_color = (0.99, 0.99, 0.99, 1)
-                self.txt.text = ''
-                self.grade.text = ' '
-                self.txt.foreground_color = [0, 0, 0, 1]
-                self.txt.background_color = (0.99, 0.99, 0.99, 1)
-                self.btn2.text = "Check"
+        if self.target_word.lower() == self.txt.text.lower().strip():
+            if self.displayed_results is False:
+                self.answer_correct()
+            elif self.displayed_results is True:
+                self.new_flashcard_page()
         else:
-            self.grade.text = 'Wrong!'
-            self.grade.color = [128, 0, 0, 1]
-            self.txt.text = self.target_word
-            self.txt.foreground_color = [128, 0, 0, 1]
-            self.txt.background_color = (0.75, 0.75, 0.75, 1)
-            self.txt.readonly = True
-            self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
-            self.btn2.text = "Next"
+            self.answer_wrong()
 
     def answer_correct(self):
-        pass
+        self.txt.foreground_color = [0, 0.5, 0, 1]
+        self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
+        self.txt.background_color = (0.75, 0.75, 0.75, 1)
+        self.txt.readonly = True
+        self.grade.color = [0, 0.8, 0, 1]
+        self.grade.text = 'Excellent!'
+        self.btn2.text = "Next"
+        self.displayed_results = True
 
     def answer_wrong(self):
-        pass
+        self.grade.text = 'Wrong!'
+        self.grade.color = (128, 0, 0, 1)
+        self.txt.text = self.target_word
+        self.txt.foreground_color = (128, 0, 0, 1)
+        self.txt.background_color = (0.75, 0.75, 0.75, 1)
+        self.txt.readonly = True
+        self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
+        self.btn2.text = "Next"
+        self.displayed_results = True
 
     def new_flashcard_page(self):
-        pass
+        self.new_flashcard()
+        self.word.text = self.native_word
+        self.txt.readonly = False
+        self.txt.cursor_color = (0.99, 0.99, 0.99, 1)
+        self.txt.text = ''
+        self.grade.text = ' '
+        self.txt.foreground_color = (0, 0, 0, 1)
+        self.txt.background_color = (0.99, 0.99, 0.99, 1)
+        self.btn2.text = "Check"
+        self.displayed_results = False
 
     def new_flashcard(self):
         self.target_word = random.choice(list(self.flashcards.keys()))
