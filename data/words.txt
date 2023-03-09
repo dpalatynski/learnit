@@ -1,21 +1,21 @@
-football player -- pi³karz
-illusionist -- iluzjonista
-artist -- artysta
-astronaut -- astronauta
-actor -- aktor
-actress -- aktorka
-singer -- piosenkarz
-writer -- pisarz
-MP3 player -- odtwarzacz MP3
-frisbee -- frisbee
-key ring -- breloczek
-wallet -- portfel
-computer -- komputer
-skateboard -- deskorolka
-watch -- zegarek
-mobile phone -- telefon komórkowy
-compass -- cyrkiel
-ruler -- linijka
-protractor -- k¹tomierz
-calculator -- kalkulator
-abacus -- liczyd³o
+test123 -- football player -- pi³karz
+test123 -- illusionist -- iluzjonista
+test123 -- artist -- artysta
+test123 -- astronaut -- astronauta
+test123 -- actor -- aktor
+test123 -- actress -- aktorka
+test123 -- singer -- piosenkarz
+test123 -- writer -- pisarz
+test124 -- MP3 player -- odtwarzacz MP3
+test124 -- frisbee -- frisbee
+test124 -- key ring -- breloczek
+test124 -- wallet -- portfel
+test124 -- computer -- komputer
+test124 -- skateboard -- deskorolka
+test124 -- watch -- zegarek
+test124 -- mobile phone -- telefon komórkowy
+test124 -- compass -- cyrkiel
+test124 -- ruler -- linijka
+test124 -- protractor -- k¹tomierz
+test124 -- calculator -- kalkulator
+test124 -- abacus -- liczyd³o
