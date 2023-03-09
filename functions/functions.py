@@ -29,11 +29,12 @@ def create_json_from_dict(words_dict: dict, filename='flashcards.json') -> None:
         json.dump(words_dict, f, ensure_ascii=False, indent=4)
 
 
-def read_json_to_dict(words_json: str) -> dict:
+def read_json_to_dict(words_json: str, list_of_words: str) -> dict:
     """ Converts json file to dictionary """
     with open(words_json, 'r', encoding='utf-8') as f:
         words_dict = json.load(f)
-    return words_dict
+
+    return words_dict[list_of_words]
 
 
 if __name__ == '__main__':

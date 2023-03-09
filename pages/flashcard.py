@@ -12,13 +12,14 @@ from functions.actions import go_to_menu, close_app
 
 
 class Flashcard(GridLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, list_of_words='test123', **kwargs):
         super().__init__(**kwargs)
 
         self.rows = 6
         self.padding = 15
         self.spacing = 15
-        self.flashcards = read_json_to_dict('./data/flashcards.json')
+        self.list_of_words = list_of_words
+        self.flashcards = read_json_to_dict('./data/flashcards.json', self.list_of_words)
         self.target_word = random.choice(list(self.flashcards.keys()))
         self.native_word = self.flashcards[self.target_word]
         self.displayed_results = False
