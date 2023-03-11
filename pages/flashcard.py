@@ -9,16 +9,17 @@ from functions.functions import read_json_to_dict
 import random
 
 from functions.actions import go_to_menu, close_app
+from functions.functions import find_list_of_flashcards
 
 
 class Flashcard(GridLayout):
-    def __init__(self, list_of_words='test123', **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self.rows = 6
         self.padding = 15
         self.spacing = 15
-        self.list_of_words = list_of_words
+        self.list_of_words = random.choice(find_list_of_flashcards('./data/flashcards.json'))
         self.flashcards = read_json_to_dict('./data/flashcards.json', self.list_of_words)
         self.target_word = random.choice(list(self.flashcards.keys()))
         self.native_word = self.flashcards[self.target_word]

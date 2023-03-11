@@ -1,21 +1,80 @@
-test123 -- football player -- pi³karz
-test123 -- illusionist -- iluzjonista
-test123 -- artist -- artysta
-test123 -- astronaut -- astronauta
-test123 -- actor -- aktor
-test123 -- actress -- aktorka
-test123 -- singer -- piosenkarz
-test123 -- writer -- pisarz
-test124 -- MP3 player -- odtwarzacz MP3
-test124 -- frisbee -- frisbee
-test124 -- key ring -- breloczek
-test124 -- wallet -- portfel
-test124 -- computer -- komputer
-test124 -- skateboard -- deskorolka
-test124 -- watch -- zegarek
-test124 -- mobile phone -- telefon komórkowy
-test124 -- compass -- cyrkiel
-test124 -- ruler -- linijka
-test124 -- protractor -- k¹tomierz
-test124 -- calculator -- kalkulator
-test124 -- abacus -- liczyd³o
+owoce -- apple -- jab³ko
+owoce -- orange -- pomarañcza
+owoce -- banana -- banan
+owoce -- strawberry -- truskawka
+owoce -- watermelon -- arbuz
+owoce -- pineapple -- ananas
+owoce -- cherry -- wiœnia
+owoce -- grape -- winogrono
+owoce -- peach -- brzoskwinia
+owoce -- mango -- mango
+owoce -- avocado -- awokado
+owoce -- blueberry -- borówka amerykañska
+owoce -- coconut -- kokos
+owoce -- fig -- figa
+owoce -- kiwi -- kiwi
+owoce -- lemon -- cytryna
+owoce -- lime -- limonka
+owoce -- papaya -- papaja
+owoce -- pomegranate -- granat
+owoce -- raspberry -- malina
+owoce -- apricot -- morela
+owoce -- blackberry -- je¿yna
+owoce -- cranberry -- ¿urawina
+owoce -- grapefruit -- grejpfrut
+owoce -- lychee -- liczi
+owoce -- nectarine -- nektarynka
+owoce -- passion fruit -- marakuja
+owoce -- pear -- gruszka
+owoce -- plum -- œliwka
+owoce -- tangerine -- mandarynka
+owoce -- melon -- melon
+owoce -- peach -- brzoskwinia
+owoce -- pineapple -- ananas
+owoce -- raspberry -- malina
+owoce -- strawberry -- truskawka
+owoce -- blackcurrant -- czarna porzeczka
+owoce -- redcurrant -- czerwona porzeczka
+owoce -- gooseberry -- agrest
+owoce -- mango -- mango
+owoce -- kiwi -- kiwi
+warzywa -- potato -- ziemniak
+warzywa -- carrot -- marchewka
+warzywa -- onion -- cebula
+warzywa -- tomato -- pomidor
+warzywa -- cucumber -- ogórek
+warzywa -- pepper -- papryka
+warzywa -- broccoli -- broku³y
+warzywa -- cauliflower -- kalafior
+warzywa -- lettuce -- sa³ata
+warzywa -- spinach -- szpinak
+warzywa -- zucchini -- cukinia
+warzywa -- eggplant -- bak³a¿an
+warzywa -- pumpkin -- dynia
+warzywa -- cabbage -- kapusta
+warzywa -- corn -- kukurydza
+warzywa -- asparagus -- szparagi
+warzywa -- beetroot -- burak
+warzywa -- mushroom -- grzyb
+warzywa -- radish -- rzodkiewka
+warzywa -- pea -- groszek
+warzywa -- arugula -- rukola
+dni tygodnia -- Monday -- poniedzia³ek
+dni tygodnia -- Tuesday -- wtorek
+dni tygodnia -- Wednesday -- œroda
+dni tygodnia -- Thursday -- czwartek
+dni tygodnia -- Friday -- pi¹tek
+dni tygodnia -- Saturday -- sobota
+dni tygodnia -- Sunday -- niedziela
+miesi¹ce -- January -- styczeñ
+miesi¹ce -- February -- luty
+miesi¹ce -- March -- marzec
+miesi¹ce -- April -- kwiecieñ
+miesi¹ce -- May -- maj
+miesi¹ce -- June -- czerwiec
+miesi¹ce -- July -- lipiec
+miesi¹ce -- August -- sierpieñ
+miesi¹ce -- September -- wrzesieñ
+miesi¹ce -- October -- paŸdziernik
+miesi¹ce -- November -- listopad
+miesi¹ce -- December -- grudzieñ
