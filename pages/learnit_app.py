@@ -7,6 +7,7 @@ from pages.addchoosepage import AddChoosePage
 from pages.addword import AddWord
 from pages.createnewlistpage import CreateNewList
 from pages.settingspage import SettingsPage
+from pages.choose_flashcards_page import ChooseFlashcards
 
 
 class LearnItApp(App):
@@ -19,6 +20,7 @@ class LearnItApp(App):
         self.create_new_list = CreateNewList()
         self.word_page = Flashcard()
         self.settings = SettingsPage()
+        self.choose_flashcards_page = ChooseFlashcards()
 
     def build(self):
         screen = Screen(name="EntryPage")  # Entry Page
@@ -43,6 +45,10 @@ class LearnItApp(App):
 
         screen = Screen(name="Settings")  # Settings
         screen.add_widget(self.settings)
+        self.screen_manager.add_widget(screen)
+
+        screen = Screen(name="ChooseFlashcards")  # Choose flashcards to learn
+        screen.add_widget(self.choose_flashcards_page)
         self.screen_manager.add_widget(screen)
 
         return self.screen_manager

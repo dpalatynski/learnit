@@ -4,7 +4,7 @@ from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 
-from functions.actions import go_to_add_choose_page, go_to_flashcard, go_to_setting_page, close_app
+from functions.actions import go_to_add_choose_page, go_to_choose_flashcards_page, go_to_setting_page, close_app
 
 
 class EntryPage(GridLayout):
@@ -24,7 +24,7 @@ class EntryPage(GridLayout):
         self.btn = Button(text='Add flashcards', font_size=25)
         self.btn.bind(on_press=go_to_add_choose_page)
         self.btn1 = Button(text='Start', font_size=25)
-        self.btn1.bind(on_press=go_to_flashcard)
+        self.btn1.bind(on_press=go_to_choose_flashcards_page)
         self.mybox.add_widget(self.btn)
         self.mybox.add_widget(self.btn1)
         self.add_widget(self.mybox)

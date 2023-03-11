@@ -37,6 +37,14 @@ def read_json_to_dict(words_json: str, list_of_words: str) -> dict:
     return words_dict[list_of_words]
 
 
+def find_list_of_flashcards(words_json: str) -> list:
+    """ Returns all lists of flashcards"""
+    with open(words_json, 'r', encoding='utf-8') as f:
+        words_dict = json.load(f)
+
+    return list(words_dict.keys())
+
+
 if __name__ == '__main__':
     # Create json from txt file
     create_json_from_dict(create_dict_from_txt_file(os.path.join(os.pardir, 'data\\words.txt')),

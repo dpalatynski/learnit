@@ -27,5 +27,9 @@ def go_to_flashcard(_):
     App.get_running_app().screen_manager.current = "Flashcard"
 
 
+def go_to_choose_flashcards_page(_):
+    App.get_running_app().screen_manager.current = "ChooseFlashcards"
+
+
 def close_app(_):
     App.get_running_app().stop()
