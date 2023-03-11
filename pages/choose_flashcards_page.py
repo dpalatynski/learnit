@@ -26,7 +26,7 @@ class ChooseFlashcards(GridLayout):
         for item in self.flashcards:
             self.mybox = BoxLayout(orientation='horizontal')
             self.btn = Button(text=item, font_size=20)
-            self.btn.bind(on_press=go_to_flashcard)
+            self.btn.bind(on_press=_go_to_flashcard)
             self.mybox.add_widget(self.btn)
             self.add_widget(self.mybox)
 
@@ -35,3 +35,7 @@ class ChooseFlashcards(GridLayout):
         self.btn1.bind(on_press=go_to_menu)
         self.mybox.add_widget(self.btn1)
         self.add_widget(self.mybox)
+
+
+def _go_to_flashcard(button_text):
+    go_to_flashcard(button_text.text)

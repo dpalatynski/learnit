@@ -22,9 +22,10 @@ def go_to_add_choose_page(_):
     App.get_running_app().screen_manager.current = "AddChoosePage"
 
 
-def go_to_flashcard(_):
+def go_to_flashcard(flashcard_list):
     Clock.schedule_once(App.get_running_app().word_page.set_focus, 0.1)
     App.get_running_app().screen_manager.current = "Flashcard"
+    App.get_running_app().word_page.open_flashcard_page(flashcard_list)
 
 
 def go_to_choose_flashcards_page(_):

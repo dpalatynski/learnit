@@ -131,3 +131,12 @@ class Flashcard(GridLayout):
     def new_flashcard(self):
         self.target_word = random.choice(list(self.flashcards.keys()))
         self.native_word = self.flashcards[self.target_word]
+
+    def open_flashcard_page(self, flashcard_list):
+        self.list_of_words = flashcard_list
+        self.flashcards = read_json_to_dict('./data/flashcards.json', self.list_of_words)
+        self.target_word = random.choice(list(self.flashcards.keys()))
+        self.native_word = self.flashcards[self.target_word]
+        self.displayed_results = False
+        self.new_flashcard()
+        self.new_flashcard_page()
