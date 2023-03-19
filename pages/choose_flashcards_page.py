@@ -24,7 +24,8 @@ class ChooseFlashcards(GridLayout):
         self.mybox.add_widget(self.lbl)
         self.add_widget(self.mybox)
 
-        self.scroll_layout = ScrollView(bar_width=15, size_hint_y=None, height=Window.size[1]*0.78, bar_margin=-15)
+        self.scroll_layout = ScrollView(bar_width=15, size_hint_y=None, height=Window.size[1]*0.78,
+                                        scroll_type=['bars'])
         self.mybox = BoxLayout(orientation='vertical', size_hint_y=None)
         self.mybox.bind(minimum_height=self.mybox.setter('height'))
         for item in self.flashcards:
