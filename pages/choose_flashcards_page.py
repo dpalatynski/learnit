@@ -43,12 +43,12 @@ class ChooseFlashcards(GridLayout):
 
         self.mybox = BoxLayout(orientation='horizontal', size_hint_y=None)
         self.checkbox1 = CheckBox(group='mode', size_hint=(None, 1))
-        self.label1 = Label(text='Test mode', size_hint_x=None, width=50)
+        self.label1 = Label(text='Quiz mode', size_hint_x=None, width=50)
         self.mybox.add_widget(self.checkbox1)
         self.mybox.add_widget(self.label1)
 
         self.checkbox2 = CheckBox(group='mode', size_hint=(None, 1))
-        self.label2 = Label(text='Learn words', size_hint_x=None, width=50)
+        self.label2 = Label(text='Study mode', size_hint_x=None, width=50, halign='right')
         self.mybox.add_widget(self.checkbox2)
         self.mybox.add_widget(self.label2)
 

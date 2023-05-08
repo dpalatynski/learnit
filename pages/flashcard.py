@@ -19,6 +19,7 @@ class Flashcard(GridLayout):
         self.rows = 6
         self.padding = 15
         self.spacing = 15
+        self.mode = 'quiz_mode'
         self.list_of_words = random.choice(find_list_of_flashcards('./data/flashcards.json'))
         self.flashcards = read_json_to_dict('./data/flashcards.json', self.list_of_words)
         self.target_word = random.choice(list(self.flashcards.keys()))
@@ -26,7 +27,16 @@ class Flashcard(GridLayout):
         self.displayed_results = False
 
         # display a flashcard
-        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.2, size_hint_y=None)
+        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
+        self.word = Label(text=self.native_word, font_size=40, color=(128, 128, 128, 1), halign='left',
+                          valign='bottom')
+        self.word.bind(size=self.word.setter('text_size'))
+        self.words.add_widget(self.word)
+        #self.add_widget(self.words)
+
+        # display a flashcard
+        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1
+                               , size_hint_y=None)
         self.word = Label(text=self.native_word, font_size=40, color=(128, 128, 128, 1), halign='left',
                           valign='bottom')
         self.word.bind(size=self.word.setter('text_size'))
@@ -91,12 +101,17 @@ class Flashcard(GridLayout):
         if self.target_word.lower() == self.txt.text.lower().strip():
             if self.displayed_results is False:
                 self.answer_correct()
+                if len(self.flashcards) == 0 and self.mode == 'quiz_mode':
+                    go_to_menu(_)
             elif self.displayed_results is True:
                 self.new_flashcard_page()
         else:
             self.answer_wrong()
 
     def answer_correct(self):
+        print(self.flashcards)
+        if self.mode == 'quiz_mode':
+            del self.flashcards[self.target_word]
         self.txt.foreground_color = [0, 0.5, 0, 1]
         self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
         self.txt.background_color = (0.75, 0.75, 0.75, 1)
