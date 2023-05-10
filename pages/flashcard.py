@@ -169,3 +169,6 @@ class Flashcard(GridLayout):
         self.amount_of_flashcards = len(self.flashcards)
         self.new_flashcard()
         self.new_flashcard_page()
+
+    def set_mode(self, mode):
+        self.mode = mode

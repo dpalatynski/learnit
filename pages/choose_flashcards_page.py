@@ -24,6 +24,7 @@ class ChooseFlashcards(GridLayout):
         self.lbl = Label(text='Choose flashcards:', font_size=40)
         self.mybox.add_widget(self.lbl)
         self.add_widget(self.mybox)
+        self.mode = 'study_mode'
 
         self.scroll_layout = ScrollView(bar_width=15, size_hint_y=None, height=Window.size[1]*0.6,
                                         scroll_type=['bars'])
@@ -48,11 +49,17 @@ class ChooseFlashcards(GridLayout):
         self.mybox.add_widget(self.label1)
 
         self.checkbox2 = CheckBox(group='mode', size_hint=(None, 1))
+        self.checkbox2.active = True
         self.label2 = Label(text='Study mode', size_hint_x=None, width=50, halign='right')
         self.mybox.add_widget(self.checkbox2)
         self.mybox.add_widget(self.label2)
 
         self.add_widget(self.mybox)
+
+    def checkbox_mode(self):
+        self.mode = 'quiz_mode' if self.checkbox1.active is True else 'study_mode'
+
+        return self.mode
 
 
 def _go_to_flashcard(button_text):
