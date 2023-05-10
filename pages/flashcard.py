@@ -5,11 +5,11 @@ from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.clock import Clock
-from functions.functions import read_json_to_dict
+
 import random
 
 from functions.actions import go_to_menu, close_app
-from functions.functions import find_list_of_flashcards
+from functions.functions import read_json_to_dict, find_list_of_flashcards
 
 
 class Flashcard(GridLayout):
@@ -25,14 +25,17 @@ class Flashcard(GridLayout):
         self.target_word = random.choice(list(self.flashcards.keys()))
         self.native_word = self.flashcards[self.target_word]
         self.displayed_results = False
+        self.counter_correct_answers = 0
+        self.amount_of_flashcards = len(self.flashcards)
 
         # display a flashcard
-        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
-        self.word = Label(text=self.native_word, font_size=40, color=(128, 128, 128, 1), halign='left',
+        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1
+                               , size_hint_y=None)
+        self.word = Label(text="", font_size=40, color=(128, 128, 128, 1), halign='left',
                           valign='bottom')
         self.word.bind(size=self.word.setter('text_size'))
         self.words.add_widget(self.word)
-        #self.add_widget(self.words)
+        self.add_widget(self.words)
 
         # display a flashcard
         self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1
@@ -43,9 +46,12 @@ class Flashcard(GridLayout):
         self.words.add_widget(self.word)
         self.add_widget(self.words)
 
-        # display results
+        # display current progress and results
         self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.05, size_hint_y=None)
-        self.grade = Label(text='', font_size=20, color=(0, 128, 0, 1), halign='right', valign='bottom')
+        self.progress = Label(text='', font_size=20, color=(128, 128, 128, 1), halign='left', valign='bottom')
+        self.progress.bind(size=self.progress.setter('text_size'))
+        self.mybox.add_widget(self.progress)
+        self.grade = Label(text='grade', font_size=20, color=(0, 128, 0, 1), halign='right', valign='bottom')
         self.grade.bind(size=self.grade.setter('text_size'))
         self.mybox.add_widget(self.grade)
         self.add_widget(self.mybox)
@@ -69,7 +75,7 @@ class Flashcard(GridLayout):
         # 2nd row of buttons: go to menu & exit
         self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
         self.btn3 = Button(text='Menu', font_size=25)
-        self.btn3.bind(on_press=go_to_menu)
+        self.btn3.bind(on_press=self._go_to_menu)
         self.btn4 = Button(text='Exit', font_size=25)
         self.btn4.bind(on_press=close_app)
         self.mybox.add_widget(self.btn3)
@@ -78,6 +84,10 @@ class Flashcard(GridLayout):
 
         Window.bind(on_key_down=self._on_keyboard_down)
         Clock.schedule_once(self.set_focus, 0.1)
+
+    def _go_to_menu(self, _):
+        self.progress.text = ''
+        go_to_menu(_)
 
     def set_focus(self, _):
         self.txt.focus = True
@@ -102,16 +112,17 @@ class Flashcard(GridLayout):
             if self.displayed_results is False:
                 self.answer_correct()
                 if len(self.flashcards) == 0 and self.mode == 'quiz_mode':
-                    go_to_menu(_)
+                    self._go_to_menu(_)
             elif self.displayed_results is True:
                 self.new_flashcard_page()
         else:
             self.answer_wrong()
 
     def answer_correct(self):
-        print(self.flashcards)
         if self.mode == 'quiz_mode':
+            self.counter_correct_answers += 1
             del self.flashcards[self.target_word]
+            self.progress.text = f'{self.counter_correct_answers}/{self.amount_of_flashcards}'
         self.txt.foreground_color = [0, 0.5, 0, 1]
         self.txt.cursor_color = (0.75, 0.75, 0.75, 1)
         self.txt.background_color = (0.75, 0.75, 0.75, 1)
@@ -154,5 +165,7 @@ class Flashcard(GridLayout):
         self.target_word = random.choice(list(self.flashcards.keys()))
         self.native_word = self.flashcards[self.target_word]
         self.displayed_results = False
+        self.counter_correct_answers = 0
+        self.amount_of_flashcards = len(self.flashcards)
         self.new_flashcard()
         self.new_flashcard_page()
