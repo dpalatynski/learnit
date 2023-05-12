@@ -29,8 +29,7 @@ class Flashcard(GridLayout):
         self.amount_of_flashcards = len(self.flashcards)
 
         # display a flashcard
-        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1
-                               , size_hint_y=None)
+        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
         self.word = Label(text="", font_size=40, color=(128, 128, 128, 1), halign='left',
                           valign='bottom')
         self.word.bind(size=self.word.setter('text_size'))
@@ -38,8 +37,7 @@ class Flashcard(GridLayout):
         self.add_widget(self.words)
 
         # display a flashcard
-        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1
-                               , size_hint_y=None)
+        self.words = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
         self.word = Label(text=self.native_word, font_size=40, color=(128, 128, 128, 1), halign='left',
                           valign='bottom')
         self.word.bind(size=self.word.setter('text_size'))
