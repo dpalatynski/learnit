@@ -4,7 +4,7 @@ Learn it - an application, which helps you to know all important vocabulary in E
 
 Future updates:
 - adding words in a faster way (in menu window),
-- more than one list with vocabulary,
+- ✓ more than one list with vocabulary,
 - notes to translated words (optional),
 - reading English words.
 
