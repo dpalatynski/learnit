@@ -42,13 +42,13 @@ class ChooseFlashcards(GridLayout):
         self.add_widget(self.scroll_layout)
         self.scroll_layout.add_widget(self.mybox)
 
-        self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
-        self.checkbox1 = CheckBox(group='mode', size_hint=(None, 1))
+        self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.08, size_hint_y=None)
+        self.checkbox1 = CheckBox(group='mode', size_hint=(None, 1), allow_no_selection=False)
         self.label1 = Label(text='Quiz mode')
         self.mybox.add_widget(self.checkbox1)
         self.mybox.add_widget(self.label1)
 
-        self.checkbox2 = CheckBox(group='mode', size_hint=(None, 1))
+        self.checkbox2 = CheckBox(group='mode', size_hint=(None, 1), allow_no_selection=False)
         self.checkbox2.active = True
         self.label2 = Label(text='Study mode')
         self.mybox.add_widget(self.checkbox2)
