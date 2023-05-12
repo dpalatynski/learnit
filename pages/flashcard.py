@@ -158,6 +158,8 @@ class Flashcard(GridLayout):
     def new_flashcard(self):
         self.target_word = random.choice(list(self.flashcards.keys()))
         self.native_word = self.flashcards[self.target_word]
+        if self.mode == 'quiz_mode':
+            self.progress.text = f'{self.counter_correct_answers}/{self.amount_of_flashcards}'
 
     def open_flashcard_page(self, flashcard_list):
         self.list_of_words = flashcard_list
