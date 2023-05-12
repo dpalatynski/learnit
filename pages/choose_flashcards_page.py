@@ -26,31 +26,31 @@ class ChooseFlashcards(GridLayout):
         self.add_widget(self.mybox)
         self.mode = 'study_mode'
 
-        self.scroll_layout = ScrollView(bar_width=15, size_hint_y=None, height=Window.size[1]*0.6,
+        self.scroll_layout = ScrollView(bar_width=15, size_hint_y=None, height=Window.size[1]*0.68,
                                         scroll_type=['bars'])
         self.mybox = BoxLayout(orientation='vertical', size_hint_y=None)
         self.mybox.bind(minimum_height=self.mybox.setter('height'))
         for item in self.flashcards:
-            self.btn = Button(text=item, font_size=30, size_hint_y=None)
+            self.btn = Button(text=item, font_size=20, size_hint_y=None, height=75)
             self.btn.bind(on_press=_go_to_flashcard)
             self.mybox.add_widget(self.btn)
 
-        self.btn1 = Button(text='Menu', font_size=30, size_hint_y=None)
+        self.btn1 = Button(text='Back to menu', font_size=30, size_hint_y=None)
         self.btn1.bind(on_press=go_to_menu)
         self.mybox.add_widget(self.btn1)
 
         self.add_widget(self.scroll_layout)
         self.scroll_layout.add_widget(self.mybox)
 
-        self.mybox = BoxLayout(orientation='horizontal', size_hint_y=None)
+        self.mybox = BoxLayout(orientation='horizontal', height=Window.size[1]*0.1, size_hint_y=None)
         self.checkbox1 = CheckBox(group='mode', size_hint=(None, 1))
-        self.label1 = Label(text='Quiz mode', size_hint_x=None, width=50)
+        self.label1 = Label(text='Quiz mode')
         self.mybox.add_widget(self.checkbox1)
         self.mybox.add_widget(self.label1)
 
         self.checkbox2 = CheckBox(group='mode', size_hint=(None, 1))
         self.checkbox2.active = True
-        self.label2 = Label(text='Study mode', size_hint_x=None, width=50, halign='right')
+        self.label2 = Label(text='Study mode')
         self.mybox.add_widget(self.checkbox2)
         self.mybox.add_widget(self.label2)
 
